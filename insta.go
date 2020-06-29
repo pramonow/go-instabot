@@ -48,7 +48,9 @@ func reloadSession() error {
 func createAndSaveSession() {
 	insta := goinsta.New(viper.GetString("user.instagram.username"), viper.GetString("user.instagram.password"))
 	instabot.Insta = insta
+	fmt.Println("try to login")
 	err := instabot.Insta.Login()
+	fmt.Println("ERROR ", err)
 	check(err)
 
 	err = instabot.Insta.Export("./goinsta-session")
@@ -252,7 +254,7 @@ func (myInstabot MyInstabot) goThrough(images *goinsta.FeedTag) {
 					myInstabot.followUser(userInfo)
 				}
 				if comment {
-					//commentImage(image)
+					commentImage(image)
 				}
 			}
 		}
@@ -263,7 +265,7 @@ func (myInstabot MyInstabot) goThrough(images *goinsta.FeedTag) {
 	}
 }
 
-// Comments an image (currently not working)
+// Comments an image
 func commentImage(image goinsta.Item) {
 	rand.Seed(time.Now().Unix())
 	text := commentsList[rand.Intn(len(commentsList))]
