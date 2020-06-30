@@ -270,7 +270,7 @@ func commentImage(image goinsta.Item) {
 	rand.Seed(time.Now().Unix())
 	text := commentsList[rand.Intn(len(commentsList))]
 	if !dev {
-		image.Comments.Add(text)
+		image.Comment(text)
 	}
 	log.Println("Commented " + text)
 	numCommented++
